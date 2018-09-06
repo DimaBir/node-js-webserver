@@ -1,0 +1,25 @@
+{
+  "name": "server_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.0",
+    "hbs": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimaVlas/node-js-webserver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DimaVlas/node-js-webserver/issues"
+  },
+  "homepage": "https://github.com/DimaVlas/node-js-webserver#readme"
+}
