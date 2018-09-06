@@ -48,6 +48,11 @@ app.get('/about', (req, res) => {
     });
 });
 
+
+app.get('/intro', (req, res) => {
+    res.render('/public/intro.html');
+});
+
 app.listen(port, () => {
     console.log(`Server is up on port: ${port}`);
 });
