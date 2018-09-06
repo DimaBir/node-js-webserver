@@ -36,10 +36,7 @@ hbs.registerHelper('screamIt', (text) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('home.hbs', {
-        pageTitle: 'Home page',
-        welcomeMessage: 'Welcome home'
-    });
+    res.sendFile(__dirname + '/public/intro.html');
 });
 
 app.get('/about', (req, res) => {
