@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const request = require('request');
 
 var app = express();
 
@@ -25,6 +26,19 @@ app.use((req, res, next) => {
         }
     })
     next();
+})
+
+var quote;
+
+request({
+    url: 'https://api.chucknorris.io/jokes/random',
+    json: true
+}, (error, response, body) => {
+    quote = body.value;
+});
+
+hbs.registerHelper('getRandomNorrisQuote', () => {
+    return quote;
 })
 
 hbs.registerHelper('getCurrentYear', () => {
