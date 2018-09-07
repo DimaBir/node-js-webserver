@@ -28,16 +28,16 @@ app.use((req, res, next) => {
     next();
 })
 
-var quote;
 
-request({
+
+hbs.registerHelper('getRandomNorrisQuote', () => {
+    var quote;
+    request({
     url: 'https://api.chucknorris.io/jokes/random',
     json: true
 }, (error, response, body) => {
     quote = body.value;
 });
-
-hbs.registerHelper('getRandomNorrisQuote', () => {
     return quote;
 })
 
