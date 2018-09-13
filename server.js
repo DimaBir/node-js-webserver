@@ -1,5 +1,5 @@
-const request = require('request');
 const express = require('express');
+const {getNorrisQuote} = require('./playground/norrisQuote');
 const hbs = require('hbs');
 const fs = require('fs');
 
@@ -28,21 +28,12 @@ app.use((req, res, next) => {
     next();
 })
 
-var NorrisQuote; 
-
-request({
-    url: `https://api.chucknorris.io/jokes/random`,
-    json: true
-}, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-        NorrisQuote = body.value;
-   } else {
-        console.log('Unable to fetch weather.');
-    }
-});
-
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
+})
+
+hbs.registerHelper('getNorrisQuote', () => {
+    return getNorrisQuote();
 })
 
 hbs.registerHelper('screamIt', (text) => {
@@ -50,9 +41,7 @@ hbs.registerHelper('screamIt', (text) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('home.hbs', {
-        Norris: NorrisQuote
-    });
+    res.render('home.hbs');
 });
 
 app.get('/about', (req, res) => {
