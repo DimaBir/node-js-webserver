@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 hbs.registerHelper('getCurrentYear', () => {
     console.log('I`ve been called, about');
-    return new Date().getFullYear();
+    return new Date.now();
 });
 
 hbs.registerHelper('screamIt', (text) => {
@@ -40,7 +40,7 @@ hbs.registerHelper('screamIt', (text) => {
 app.get('/', (req, res) => {
     res.render('home.hbs', {
         helpers: {
-            getQuote: function() {
+            getQuote: () => {
                 request({
                     url: `https://api.chucknorris.io/jokes/random`,
                     json: true
