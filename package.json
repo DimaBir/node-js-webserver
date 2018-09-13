@@ -5,7 +5,8 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.16.0",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {},
   "scripts": {
