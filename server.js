@@ -33,6 +33,7 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('getQuote', () => {
+    console.log('I`ve been called');
     return norris.getNorrisQuote();
 });
 
