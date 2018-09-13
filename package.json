@@ -1,7 +1,6 @@
 {
   "name": "server_app",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.16.0",
@@ -22,5 +21,7 @@
   "bugs": {
     "url": "https://github.com/DimaVlas/node-js-webserver/issues"
   },
-  "homepage": "https://github.com/DimaVlas/node-js-webserver#readme"
+  "homepage": "https://github.com/DimaVlas/node-js-webserver#readme",
+  "keywords": [],
+  "description": ""
 }
