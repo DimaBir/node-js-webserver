@@ -13,6 +13,4 @@ var getNorrisQuote = () => {
     });
 }
 
-module.exports = {
-    getNorrisQuote
-};
+module.exports.getNorrisQuote = getNorrisQuote;

@@ -7,7 +7,7 @@ var app = express();
 
 const port = process.env.PORT || 3000;
 
-hbs.registerPartials(__dirname + '/views/partials')
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
 // Middleware
@@ -24,21 +24,21 @@ app.use((req, res, next) => {
         if (err) {
             console.log('Unable to append to server.log.');
         }
-    })
+    });
     next();
-})
+});
 
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
-})
+});
 
 hbs.registerHelper('getQuote', () => {
     return norris.getNorrisQuote();
-})
+});
 
 hbs.registerHelper('screamIt', (text) => {
     return text.toUpperCase();
-})
+});
 
 app.get('/', (req, res) => {
     res.render('home.hbs');
