@@ -1,3 +1,4 @@
+const request = require('request');
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
@@ -27,6 +28,19 @@ app.use((req, res, next) => {
     next();
 })
 
+var NorrisQuote; 
+
+request({
+    url: `https://api.chucknorris.io/jokes/random`,
+    json: true
+}, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+        NorrisQuote = body.value;
+   } else {
+        console.log('Unable to fetch weather.');
+    }
+});
+
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
 })
@@ -36,7 +50,9 @@ hbs.registerHelper('screamIt', (text) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/intro.html');
+    res.sendFile(__dirname + '/public/intro.html',{
+        Norris: NorrisQuote
+    });
 });
 
 app.get('/about', (req, res) => {
