@@ -33,29 +33,28 @@ hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
 });
 
-hbs.registerHelper('getQuote', () => {
-    var getNorrisQuote = () => {
-        request({
-            url: `https://api.chucknorris.io/jokes/random`,
-            json: true
-        }, (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-                console.log(body.value);
-                return body.value;
-            } else {
-                console.log('Unable to fetch weather.');
-            }
-        });
-    };
-    return getNorrisQuote();
-});
-
 hbs.registerHelper('screamIt', (text) => {
     return text.toUpperCase();
 });
 
 app.get('/', (req, res) => {
-    res.render('home.hbs');
+    res.render('home.hbs', {
+        helpers: {
+            getQuote: function() {
+                request({
+                    url: `https://api.chucknorris.io/jokes/random`,
+                    json: true
+                }, (error, response, body) => {
+                    if (!error && response.statusCode === 200) {
+                        console.log(body.value);
+                        return body.value;
+                    } else {
+                        console.log('Unable to fetch weather.');
+                    }
+                });
+            }
+        }
+    });
 });
 
 app.get('/about', (req, res) => {
