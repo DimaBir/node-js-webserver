@@ -34,7 +34,7 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('getQuote', () => {
-    return () => {
+    var getNorrisQuote = () => {
         request({
             url: `https://api.chucknorris.io/jokes/random`,
             json: true
@@ -42,11 +42,12 @@ hbs.registerHelper('getQuote', () => {
             if (!error && response.statusCode === 200) {
                 console.log(body.value);
                 return body.value;
-           } else {
+            } else {
                 console.log('Unable to fetch weather.');
             }
         });
     };
+    return getNorrisQuote();
 });
 
 hbs.registerHelper('screamIt', (text) => {
