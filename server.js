@@ -1,5 +1,5 @@
-const express = require('express');
 const request = require('request');
+const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
@@ -7,7 +7,7 @@ var app = express();
 
 const port = process.env.PORT || 3000;
 
-hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs');
 
 // Middleware
@@ -24,36 +24,34 @@ app.use((req, res, next) => {
         if (err) {
             console.log('Unable to append to server.log.');
         }
-    });
+    })
     next();
+})
+
+var NorrisQuote; 
+
+request({
+    url: `https://api.chucknorris.io/jokes/random`,
+    json: true
+}, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+        NorrisQuote = body.value;
+   } else {
+        console.log('Unable to fetch weather.');
+    }
 });
 
 hbs.registerHelper('getCurrentYear', () => {
-    console.log('I`ve been called, about');
     return new Date().getFullYear();
-});
+})
 
 hbs.registerHelper('screamIt', (text) => {
     return text.toUpperCase();
-});
+})
 
 app.get('/', (req, res) => {
     res.render('home.hbs', {
-        helpers: {
-            getQuote: () => {
-                request({
-                    url: `https://api.chucknorris.io/jokes/random`,
-                    json: true
-                }, (error, response, body) => {
-                    if (!error && response.statusCode === 200) {
-                        console.log(body.value);
-                        return body.value;
-                    } else {
-                        console.log('Unable to fetch weather.');
-                    }
-                });
-            }
-        }
+        Norris: NorrisQuote
     });
 });
 
