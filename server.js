@@ -1,5 +1,5 @@
 const express = require('express');
-const norris = require('./playground/norrisQuote');
+const request = require('request');
 const hbs = require('hbs');
 const fs = require('fs');
 
@@ -34,8 +34,19 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('getQuote', () => {
-    console.log('I`ve been called');
-    return norris.getNorrisQuote();
+    return getNorrisQuote = () => {
+        request({
+            url: `https://api.chucknorris.io/jokes/random`,
+            json: true
+        }, (error, response, body) => {
+            if (!error && response.statusCode === 200) {
+                console.log(body.value);
+                return body.value;
+           } else {
+                console.log('Unable to fetch weather.');
+            }
+        });
+    };
 });
 
 hbs.registerHelper('screamIt', (text) => {
