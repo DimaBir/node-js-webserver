@@ -12,6 +12,6 @@ var getNorrisQuote = () => {
             console.log('Unable to fetch weather.');
         }
     });
-}
+};
 
 module.exports.getNorrisQuote = getNorrisQuote;
