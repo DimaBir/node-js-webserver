@@ -50,7 +50,7 @@ hbs.registerHelper('screamIt', (text) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/intro.html',{
+    res.sendFile('home.hbs',{
         Norris: NorrisQuote
     });
 });
