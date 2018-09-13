@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 hbs.registerHelper('getCurrentYear', () => {
     console.log('I`ve been called, about');
-    return new Date.now();
+    return new Date().now;
 });
 
 hbs.registerHelper('screamIt', (text) => {
