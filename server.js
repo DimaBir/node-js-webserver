@@ -1,7 +1,6 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
-const request = require('request');
 
 var app = express();
 
@@ -20,37 +19,21 @@ app.use((req, res, next) => {
     var log = `${now}: ${req.method} ${req.url}`;
 
     console.log(log);
-    fs.appendFile('server.log',
-        log + '\n',
-        (err) => {
-            if (err) {
-                console.log('Unable to append to server.log.');
-            }
-        });
+    fs.appendFile('server.log', log + '\n', (err) => {
+        if (err) {
+            console.log('Unable to append to server.log.');
+        }
+    })
     next();
-});
+})
 
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear();
+})
 
-hbs.registerHelper('getRandomNorrisQuote',
-    () => {
-        request({
-                url: 'https://api.chucknorris.io/jokes/random',
-                json: true
-            },
-            (error, response, body) => {
-                return quote = body.value;
-            });
-    });
-
-hbs.registerHelper('getCurrentYear',
-    () => {
-        return new Date().getFullYear();
-    });
-
-hbs.registerHelper('screamIt',
-    (text) => {
-        return text.toUpperCase();
-    });
+hbs.registerHelper('screamIt', (text) => {
+    return text.toUpperCase();
+})
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/intro.html');
