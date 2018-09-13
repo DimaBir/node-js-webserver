@@ -34,7 +34,7 @@ hbs.registerHelper('getCurrentYear', () => {
 });
 
 hbs.registerHelper('getQuote', () => {
-    return getNorrisQuote = () => {
+    return () => {
         request({
             url: `https://api.chucknorris.io/jokes/random`,
             json: true
