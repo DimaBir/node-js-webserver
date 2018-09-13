@@ -1,5 +1,5 @@
 const express = require('express');
-const {getNorrisQuote} = require('./playground/norrisQuote');
+const norris = require('./playground/norrisQuote');
 const hbs = require('hbs');
 const fs = require('fs');
 
@@ -32,8 +32,8 @@ hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
 })
 
-hbs.registerHelper('getNorrisQuote', () => {
-    return getNorrisQuote();
+hbs.registerHelper('getQuote', () => {
+    return norris.getNorrisQuote();
 })
 
 hbs.registerHelper('screamIt', (text) => {
